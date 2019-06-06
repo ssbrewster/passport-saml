@@ -61,6 +61,9 @@ MultiSamlStrategy.prototype.generateServiceProviderMetadata = function( req, dec
       return callback(err);
     }
 
+    decryptionCert = decryptionCert ? decryptionCert : samlOptions.cert;
+    signingCert = signingCert ? signingCert : samlOptions.cert;
+
     self._saml = new saml.SAML(Object.assign({}, self._options, samlOptions));
     return callback(null, self.constructor.super_.prototype.generateServiceProviderMetadata.call(self, decryptionCert, signingCert ));
   });
